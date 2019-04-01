@@ -26,7 +26,8 @@ def main():
 	objRek = boto3.client('rekognition', region_name = objArgs.region)
 
 	for i in objArgs.IMG:
-		data = open(i, 'rb').read()
+		with open(i, 'rb') as f:
+			data = f.read()
 		diResp = objRek.detect_faces(
 			Image = {
 				'Bytes': data,
