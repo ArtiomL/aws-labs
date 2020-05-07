@@ -8,6 +8,10 @@
 sudo curl --silent --location -o /usr/local/bin/kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.15.10/2020-02-22/bin/linux/amd64/kubectl
 sudo chmod +x /usr/local/bin/kubectl
 
+# Install aws-iam-authenticator
+sudo curl --silent --location -o /usr/local/bin/aws-iam-authenticator https://amazon-eks.s3.us-west-2.amazonaws.com/1.16.8/2020-04-16/bin/linux/amd64/aws-iam-authenticator
+sudo chmod +x /usr/local/bin/aws-iam-authenticator
+
 # Update awscli
 sudo pip install --upgrade awscli && hash -r
 
@@ -26,7 +30,7 @@ rm terraform.zip
 sudo mv terraform /usr/local/bin/
 
 # Verify the binaries are in path
-for command in kubectl jq envsubst aws terraform
+for command in kubectl jq envsubst aws aws-iam-authenticator terraform
   do
     which $command &>/dev/null && echo "$command in path" || echo "$command NOT FOUND"
   done
