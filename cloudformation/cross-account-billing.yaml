@@ -10,6 +10,7 @@ Parameters:
   PartnerAWSAccountID:
     Type: Number
     Description: Account ID of the AWS account to which access will be granted
+    AllowedPattern: "^[0-9]{12}$"
 
 Resources:
   rPartnerCrossAccountRole:
