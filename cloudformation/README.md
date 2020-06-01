@@ -1,6 +1,6 @@
-# AWS CloudFormation Templates
+## AWS CloudFormation Templates
 
-## Provision a role for cross-account access to AWS Billing and Cost Management
+### Provision a role for cross-account access to AWS Billing and Cost Management
 
 [![Launch Stack](../img/cfls.svg)](https://console.aws.amazon.com/cloudformation/home?region=eu-west-1#/stacks/new?stackName=stPartnerBilling&templateURL=https://artl-cfn.s3-eu-west-1.amazonaws.com/cross-account-billing.yaml)
 
