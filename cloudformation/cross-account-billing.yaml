@@ -1,0 +1,74 @@
+---
+AWSTemplateFormatVersion: "2010-09-09"
+
+Description: AWS CloudFormation template to provision a partner role for cross-account access to AWS Billing and Cost Management
+
+Parameters:
+  PartnerName:
+    Type: String
+    Description: Partner name
+  PartnerAWSAccountID:
+    Type: Number
+    Description: Account ID of the AWS account to which access will be granted
+
+Resources:
+  rPartnerCrossAccountRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub role${PartnerName}CrossAccount
+      ManagedPolicyArns:
+        - !Ref rPartnerCrossAccountPolicy
+      AssumeRolePolicyDocument:
+        Statement:
+        - Effect: Allow
+          Principal:
+            AWS: !Sub arn:aws:iam::${PartnerAWSAccountID}:root
+          Action:
+          - sts:AssumeRole
+          Condition:
+            Bool:
+              aws:MultiFactorAuthPresent: true
+
+  rPartnerCrossAccountPolicy:
+    Type: AWS::IAM::ManagedPolicy
+    Properties:
+      ManagedPolicyName: !Sub pol${PartnerName}CrossAccount
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+        - Action:
+          - aws-portal:ViewAccount
+          - aws-portal:ViewBilling
+          - aws-portal:ViewPaymentMethods
+          - aws-portal:ViewUsage
+          - budgets:ViewBudget
+          - ce:DescribeCostCategoryDefinition
+          - ce:GetCostAndUsage
+          - ce:GetCostAndUsageWithResources
+          - ce:GetCostForecast
+          - ce:GetDimensionValues
+          - ce:GetReservationCoverage
+          - ce:GetReservationPurchaseRecommendation
+          - ce:GetReservationUtilization
+          - ce:GetRightsizingRecommendation
+          - ce:GetSavingsPlansCoverage
+          - ce:GetSavingsPlansPurchaseRecommendation
+          - ce:GetSavingsPlansUtilization
+          - ce:GetSavingsPlansUtilizationDetails
+          - ce:GetTags
+          - ce:GetUsageForecast
+          - ce:ListCostCategoryDefinitions
+          - cur:DescribeReportDefinitions
+          - pricing:DescribeServices
+          - pricing:GetAttributeValues
+          - pricing:GetProducts
+          Effect: Allow
+          Resource: "*"
+
+Outputs:
+  SwitchRoleURL:
+    Description: Switch role URL
+    Value: !Sub "https://signin.aws.amazon.com/switchrole?roleName=role${PartnerName}CrossAccount&account=${AWS::AccountId}"
+  RoleArn:
+    Description: IAM role ARN
+    Value: !GetAtt rPartnerCrossAccountRole.Arn
