@@ -8,9 +8,9 @@ Parameters:
     Type: String
     Description: Partner name
   PartnerAWSAccountID:
-    Type: Number
+    Type: String
     Description: Account ID of the AWS account to which access will be granted
-    AllowedPattern: "^[0-9]{12}$"
+    AllowedPattern: "^\d{12}$"
 
 Resources:
   rPartnerCrossAccountRole:
