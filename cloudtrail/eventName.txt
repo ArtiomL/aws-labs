@@ -343,6 +343,7 @@ CreateFolderShare
 CreateFunction20150331
 CreateGameSession
 CreateGameSessionQueue
+CreateGrant
 CreateGraphqlApi
 CreateGroup
 CreateHapg
@@ -2301,6 +2302,7 @@ MoveAddressToVpc
 NotifyMigrationTaskState
 PaginatedOrganizationActivity
 PeerVpc
+PerformPreLaunchChecks
 Ping
 PolicyExecutionEvent
 PollForJobs
