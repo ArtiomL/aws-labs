@@ -1,7 +1,7 @@
 ---
 AWSTemplateFormatVersion: "2010-09-09"
 
-Description: AWS CloudFormation template to provision a partner role for cross-account access to AWS Billing and Cost Management
+Description: AWS CloudFormation template to provision an IAM role for partner cross-account access to AWS Billing and Cost Management
 
 Parameters:
   PartnerName:
