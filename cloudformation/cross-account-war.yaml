@@ -1,0 +1,50 @@
+---
+AWSTemplateFormatVersion: "2010-09-09"
+
+Description: AWS CloudFormation template to provision an IAM role for partner cross-account access to AWS Well-Architected Tool
+
+Parameters:
+  PartnerName:
+    Type: String
+    Description: Partner name
+    Default: AWS
+  PartnerAWSAccountID:
+    Type: String
+    Description: Account ID of the AWS account to which access will be granted
+    AllowedPattern: "^[0-9]{12}$"
+  AccessType:
+    Type: String
+    Default: ReadOnly
+    AllowedValues: 
+      - ReadOnly
+      - FullAccess
+    Description: Select read-only or full access to AWS Well-Architected Tool
+
+Conditions: 
+  FullAccess: !Equals [ !Ref AccessType, 'FullAccess' ]
+
+Resources:
+  rPartnerCrossAccountWARole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Sub role${PartnerName}CrossAccountWA
+      ManagedPolicyArns:
+        - !If [FullAccess, 'arn:aws:iam::aws:policy/WellArchitectedConsoleFullAccess', 'arn:aws:iam::aws:policy/WellArchitectedConsoleReadOnlyAccess']
+      AssumeRolePolicyDocument:
+        Statement:
+        - Effect: Allow
+          Principal:
+            AWS: !Sub arn:aws:iam::${PartnerAWSAccountID}:root
+          Action:
+          - sts:AssumeRole
+          Condition:
+            Bool:
+              aws:MultiFactorAuthPresent: true
+
+Outputs:
+  SwitchRoleURL:
+    Description: Switch role URL
+    Value: !Sub "https://signin.aws.amazon.com/switchrole?roleName=role${PartnerName}CrossAccountWA&account=${AWS::AccountId}"
+  RoleArn:
+    Description: IAM role ARN
+    Value: !GetAtt rPartnerCrossAccountWARole.Arn
