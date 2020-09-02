@@ -2,7 +2,7 @@
 # Install Kubernetes Tools
 # https://github.com/ArtiomL/aws-labs
 # Artiom Lichtenstein
-# v1.7, 23/08/2020
+# v1.8, 02/09/2020
 
 # Install kubectl
 sudo curl --silent --location -o /usr/local/bin/kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.15.10/2020-02-22/bin/linux/amd64/kubectl
@@ -34,6 +34,9 @@ aws ec2 associate-iam-instance-profile --instance-id $(curl -s http://169.254.16
 
 # To ensure temporary credentials aren’t already in place we will also remove any existing credentials file
 rm -vf ${HOME}/.aws/credentials
+
+# Generate SSH Key Pair
+ssh-keygen -b 2048 -t rsa -f ~/eks.key -q -N "Much_S3cr3t-W0w1$"
 
 # Verify the binaries are in path
 for command in kubectl jq envsubst aws aws-iam-authenticator terraform
