@@ -1,0 +1,29 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Sid": "ProtectPrivateMarketplace",
+        "Effect": "Deny",
+        "Action": [
+          "aws-marketplace:AcceptAgreementApprovalRequest",
+          "aws-marketplace:AssociateProductsWithPrivateMarketplace",
+          "aws-marketplace:CancelAgreementRequest",
+          "aws-marketplace:CancelChangeSet",
+          "aws-marketplace:CreatePrivateMarketplace",
+          "aws-marketplace:CreatePrivateMarketplaceProfile",
+          "aws-marketplace:DisassociateProductsFromPrivateMarketplace",
+          "aws-marketplace:RejectAgreementApprovalRequest",
+          "aws-marketplace:StartChangeSet",
+          "aws-marketplace:StartPrivateMarketplace",
+          "aws-marketplace:StopPrivateMarketplace",
+          "aws-marketplace:Subscribe",
+          "aws-marketplace:Unsubscribe",
+          "aws-marketplace:UpdateAgreementApprovalRequest",
+          "aws-marketplace:UpdatePrivateMarketplaceProfile"
+        ],
+        "Resource": [
+          "*"
+        ]
+      }
+    ]
+}
