@@ -1,4 +1,4 @@
-PUT  awswaf-*/_mapping/waflog
+PUT awswaf-*/_mapping/waflog
 {
       "properties": {
         "action": {
