@@ -1,0 +1,113 @@
+PUT awswaf-*/_mapping/waflog
+{
+      "properties": {
+        "action": {
+          "type": "text",
+          "fielddata": true
+        },
+        "httpRequest": {
+            "properties": {
+                "args": {
+                    "type": "text",
+                    "fielddata": true
+                },
+                "clientIp": {
+                    "type": "text",
+                    "fielddata": true
+                },
+                "country": {
+                    "type": "text",
+                    "fielddata": true
+                },
+                "headers": {
+                    "properties": {
+                        "name" : {
+                            "type": "text",
+                            "fielddata": true
+                        },
+                        "value" : {
+                            "type": "text",
+                            "fielddata": true
+                        }
+                    }
+                },
+                "httpMethod": {
+                    "type": "text",
+                    "fielddata": true
+                },
+                "httpVersion": {
+                    "type": "text",
+                    "fielddata": true
+                },
+                "requestId": {
+                    "type": "text",
+                    "fielddata": true
+                },
+                "uri": {
+                    "type": "text",
+                    "fielddata": true
+                }
+            }
+        },
+        "httpSourceId": {
+            "type": "text",
+            "fielddata": true
+        },
+        "httpSourceName": {
+            "type": "text",
+            "fielddata": true
+        },
+        "labels": {
+            "properties": {
+                "name": {
+                    "type": "text",
+                    "fielddata": true
+                }
+            }
+        },
+        "ruleGroupList": {
+            "properties": {
+                "ruleGroupId": {
+                    "type": "text",
+                    "fielddata": true
+                },
+                "terminatingRule": {
+                    "properties": {
+                        "action": {
+                            "type": "text",
+                            "fielddata": true
+                        },
+                        "ruleId": {
+                            "type": "text",
+                            "fielddata": true
+                        }
+                    }
+                }
+            }
+        },
+        "terminatingRuleId": {
+            "type": "text",
+            "fielddata": true
+        },
+        "terminatingRuleMatchDetails" : {
+            "properties" : {
+              "conditionType" : {
+                "type" : "text",
+                "fielddata": true
+              },
+              "location" : {
+                "type" : "text",
+                "fielddata": true
+              },
+              "matchedData" : {
+                "type" : "text",
+                "fielddata": true
+              }
+            } 
+        },
+        "webaclId" : {
+            "type" : "text",
+            "fielddata": true
+        }
+    }
+}
